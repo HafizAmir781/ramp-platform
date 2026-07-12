@@ -1,0 +1,132 @@
+/* ==========================================
+   RAMP Enterprise Design System v1.0
+   Rabta Aimma Masajid Punjab
+   ========================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================
+   CSS Variables
+========================== */
+
+:root{
+
+    --primary:#0F766E;
+    --primary-dark:#115E59;
+    --secondary:#F8FAFC;
+    --accent:#D4AF37;
+
+    --white:#FFFFFF;
+    --black:#111827;
+
+    --text:#374151;
+    --text-light:#6B7280;
+
+    --border:#E5E7EB;
+
+    --success:#16A34A;
+    --warning:#F59E0B;
+    --danger:#DC2626;
+
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+
+    --radius:12px;
+
+    --transition:.3s ease;
+}
+
+/* ==========================
+   Reset
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--secondary);
+
+    color:var(--text);
+
+    line-height:1.7;
+
+}
+
+/* ==========================
+   Links
+========================== */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ==========================
+   Images
+========================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* ==========================
+   Container
+========================== */
+
+.container{
+
+    width:min(1200px,92%);
+
+    margin:auto;
+
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+.btn{
+
+    display:inline-block;
+
+    padding:14px 28px;
+
+    border-radius:var(--radius);
+
+    transition:var(--transition);
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* End Design System */
