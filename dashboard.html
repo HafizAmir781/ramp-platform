@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        RAMP | Admin Dashboard
+    </title>
+
+
+    <link rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="../assets/css/responsive.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <header class="card">
+
+        <h1>
+            RAMP Admin Dashboard
+        </h1>
+
+        <p>
+            رابطہ آئمہ مساجد پنجاب
+        </p>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </header>
+
+
+
+    <section class="card">
+
+        <h2>
+            Statistics
+        </h2>
+
+
+        <div id="stats">
+
+
+            <p>
+                Total Imams:
+                <strong id="totalCount">
+                    0
+                </strong>
+            </p>
+
+
+            <p>
+                Verified:
+                <strong id="verifiedCount">
+                    0
+                </strong>
+            </p>
+
+
+            <p>
+                Pending:
+                <strong id="pendingCount">
+                    0
+                </strong>
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+    <section class="card">
+
+
+        <h2>
+            Imam Registrations
+        </h2>
+
+
+        <div id="imamTable">
+
+            Loading Data...
+
+        </div>
+
+
+    </section>
+
+
+
+</div>
+
+
+
+
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+
+
+<script src="../js/firebase.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/dashboard.js"></script>
+
+
+
+</body>
+
+</html>

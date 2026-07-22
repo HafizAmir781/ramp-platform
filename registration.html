@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAMP | Imam Registration</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<header class="page-header">
+
+    <h1>RAMP</h1>
+
+    <p>Rabta Aimma Masajid Punjab</p>
+
+</header>
+
+<main class="container">
+
+    <section class="card">
+
+        <h2>Imam Registration</h2>
+
+        <p>Please complete the form below.</p>
+
+        <form id="registrationForm">
+
+            <div class="form-group">
+
+                <label for="imamName">
+                    Imam Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="imamName"
+                    placeholder="Enter Imam Name"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="mosqueName">
+                    Mosque Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="mosqueName"
+                    placeholder="Jamia Masjid"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="district">
+                    District *
+                </label>
+
+                <select id="district" required>
+
+                    <option value="">Select District</option>
+
+                    <option>Lahore</option>
+                    <option>Rawalpindi</option>
+                    <option>Faisalabad</option>
+                    <option>Multan</option>
+                    <option>Gujranwala</option>
+                    <option>Sialkot</option>
+                    <option>Bahawalpur</option>
+
+                </select>
+
+            </div>
+
+            <button
+                type="submit"
+                id="submitBtn">
+
+                Register Imam
+
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="../js/firebase.js"></script>
+
+<script src="../js/register.js"></script>
+
+</body>
+
+</html>

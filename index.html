@@ -37,18 +37,12 @@
     <meta name="color-scheme"
         content="light">
 
-    <!-- Open Graph -->
-
     <meta property="og:type" content="website">
     <meta property="og:title" content="Rabta Aimma Masajid Punjab">
     <meta property="og:description" content="Official Digital Platform">
     <meta property="og:locale" content="ur_PK">
 
-    <!-- Twitter -->
-
     <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Google Fonts -->
 
     <link rel="preconnect"
         href="https://fonts.googleapis.com">
@@ -60,21 +54,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- CSS -->
-
     <link rel="stylesheet"
         href="assets/css/style.css">
 
     <link rel="stylesheet"
         href="assets/css/responsive.css">
 
+    <link rel="icon"
+        href="assets/icons/favicon.ico">
+
 </head>
 
 <body>
-
-    <!-- =========================================================
-            WEBSITE WRAPPER
-    ========================================================== -->
 
     <div id="app">
 
@@ -91,13 +82,9 @@
 
                     <div class="brand-text">
 
-                        <h1>
-                            رابطہ آئمہ مساجد پنجاب
-                        </h1>
+                        <h1>رابطہ آئمہ مساجد پنجاب</h1>
 
-                        <p>
-                            Rabta Aimma Masajid Punjab
-                        </p>
+                        <p>Rabta Aimma Masajid Punjab</p>
 
                     </div>
 
@@ -105,11 +92,13 @@
 
                 <div class="header-actions">
 
-                    <a href="pages/login.html" class="btn login-btn">
+                    <a href="pages/login.html"
+                        class="btn login-btn">
                         Login
                     </a>
 
-                    <a href="pages/registration.html" class="btn register-btn">
+                    <a href="pages/registration.html"
+                        class="btn register-btn">
                         Registration
                     </a>
 
@@ -121,25 +110,110 @@
 
         <!-- ================= NAVIGATION ================= -->
 
-        <nav id="main-navigation">
+        <nav id="main-navigation"></nav>
 
-        </nav>
+        <!-- ================= MAIN CONTENT ================= -->
 
-        <!-- ================= MAIN ================= -->
+<main id="main-content">
 
-        <main id="main-content">
+    <section class="container">
 
-        </main>
+
+        <h2>
+            Live Imam Directory
+        </h2>
+
+
+
+        <!-- Verified Counter -->
+
+        <div class="directory-stats">
+
+            <h3>
+                Verified Imams:
+                <span id="verifiedCounter">
+                    0
+                </span>
+            </h3>
+
+        </div>
+
+
+
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+
+            <input 
+                type="text"
+                id="searchInput"
+                placeholder="امام یا مسجد تلاش کریں">
+
+
+        </div>
+
+
+
+
+        <!-- District Filter -->
+
+        <div class="filter-box">
+
+
+            <select id="districtFilter">
+
+                <option value="">
+                    تمام اضلاع
+                </option>
+
+            </select>
+
+
+        </div>
+
+
+
+
+        <p data-ramp-status>
+            Connecting to RAMP Database...
+        </p>
+
+
+
+        <div id="imam-list">
+
+            Loading Live Data...
+
+        </div>
+
+
+    </section>
+
+</main>
 
         <!-- ================= FOOTER ================= -->
 
         <footer id="main-footer">
 
+            <div class="container">
+
+                © 2026 Rabta Aimma Masajid Punjab
+
+            </div>
+
         </footer>
 
     </div>
 
-    <!-- JavaScript -->
+    <!-- Firebase SDK -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+    <!-- RAMP JavaScript -->
 
     <script src="js/firebase.js"></script>
     <script src="js/auth.js"></script>
