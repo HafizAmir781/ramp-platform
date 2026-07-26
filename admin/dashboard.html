@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAMP | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="page-header">
+
+    <h1>RAMP Admin</h1>
+
+    <p>
+        Rabta Aimma Masajid Punjab
+    </p>
+
+</header>
+
+
+
+<main class="container">
+
+
+
+    <!-- Statistics -->
+
+    <section class="card">
+
+
+        <h2>
+            Dashboard Statistics
+        </h2>
+
+
+
+        <div class="stats-grid">
+
+
+            <div class="stat-box">
+
+                <h3 id="pendingCount">
+                    0
+                </h3>
+
+                <p>
+                    Pending
+                </p>
+
+            </div>
+
+
+
+            <div class="stat-box">
+
+                <h3 id="approvedCount">
+                    0
+                </h3>
+
+                <p>
+                    Approved
+                </p>
+
+            </div>
+
+
+
+            <div class="stat-box">
+
+                <h3 id="totalCount">
+                    0
+                </h3>
+
+                <p>
+                    Total
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- Pending Registrations -->
+
+
+    <section class="card">
+
+
+        <h2>
+            Imam Registrations
+        </h2>
+
+
+
+
+        <table class="data-table">
+
+
+            <thead>
+
+
+                <tr>
+
+                    <th>
+                        Imam
+                    </th>
+
+
+                    <th>
+                        Mosque
+                    </th>
+
+
+                    <th>
+                        District
+                    </th>
+
+
+                    <th>
+                        Status
+                    </th>
+
+
+                    <th>
+                        Actions
+                    </th>
+
+
+                </tr>
+
+
+            </thead>
+
+
+
+
+
+            <tbody id="registrationTable">
+
+
+                <tr>
+
+
+                    <td colspan="5">
+
+                        Loading Registrations...
+
+
+                    </td>
+
+
+                </tr>
+
+
+
+            </tbody>
+
+
+
+
+        </table>
+
+
+
+    </section>
+
+
+
+</main>
+
+
+
+
+
+<!-- Firebase SDK -->
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+
+
+
+
+<!-- RAMP Core -->
+
+
+<script src="../js/firebase.js"></script>
+
+<script src="../js/admin.js"></script>
+
+
+
+
+</body>
+
+
+</html>

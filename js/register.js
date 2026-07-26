@@ -1,57 +1,88 @@
-/**
- * ==========================================================
- * RAMP Ecosystem
- * Registration Module
- * Version : 1.0
- * ==========================================================
- */
+// ======================================================
+// RAMP - Imam Registration System
+// File: js/register.js
+// Version : 2.0 Production
+// ======================================================
 
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("registrationForm");
+const registrationForm = document.getElementById("registrationForm");
+const submitBtn = document.getElementById("submitBtn");
+const loading = document.getElementById("loading");
+const successMessage = document.getElementById("successMessage");
+const errorMessage = document.getElementById("errorMessage");
 
-    if (!form) return;
+registrationForm.addEventListener("submit", async function (e) {
 
-    form.addEventListener("submit", registerImam);
-});
-
-async function registerImam(e) {
     e.preventDefault();
 
-    const submitBtn = document.querySelector("#submitBtn");
+    // Clear Messages
+    successMessage.textContent = "";
+    errorMessage.textContent = "";
 
+    // Loading
+    submitBtn.disabled = true;
+    loading.style.display = "block";
+
+    // Form Values
     const imamName = document.getElementById("imamName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
     const mosqueName = document.getElementById("mosqueName").value.trim();
-    const district = document.getElementById("district").value.trim();
+    const district = document.getElementById("district").value;
+    const tehsil = document.getElementById("tehsil").value.trim();
+    const address = document.getElementById("address").value.trim();
 
-    if (!imamName || !mosqueName || !district) {
-        alert("تمام ضروری فیلڈز مکمل کریں۔");
+    // Validation
+    if (
+        !imamName ||
+        !phone ||
+        !mosqueName ||
+        !district ||
+        !tehsil
+    ) {
+
+        errorMessage.textContent = "Please fill all required fields.";
+
+        loading.style.display = "none";
+        submitBtn.disabled = false;
+
         return;
     }
 
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Saving...";
-
     try {
-        await db.collection("imams").add({
+
+        await window.db.collection("imamRegistrations").add({
+
             imamName,
+            phone,
             mosqueName,
             district,
+            tehsil,
+            address,
+
             verified: false,
-            status: "active",
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            status: "Pending",
+
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+
         });
 
-        alert("امام کا ریکارڈ کامیابی سے محفوظ ہوگیا۔");
+        successMessage.textContent = "Registration submitted successfully.";
 
-        e.target.reset();
+        registrationForm.reset();
+
     } catch (error) {
-        console.error(error);
-        alert("ریکارڈ محفوظ نہیں ہوسکا۔ دوبارہ کوشش کریں۔");
+
+        console.error("Registration Error:", error);
+
+        errorMessage.textContent =
+            "Unable to save registration. Please try again.";
+
     } finally {
+
+        loading.style.display = "none";
         submitBtn.disabled = false;
-        submitBtn.innerText = "Register";
+
     }
-}
+
+});

@@ -2,15 +2,14 @@
  * ==========================================================
  * RAMP Ecosystem
  * Imam Profile Module
- * Version : 1.0
+ * Version : 2.0 Production
  *
  * Features:
- * - Load Imam Profile by ID
- * - Firestore Data Fetch
- * - Verified Badge
+ * - Firestore imamRegistrations
+ * - Verified Only
+ * - Full Profile Data
  * ==========================================================
  */
-
 
 "use strict";
 
@@ -31,7 +30,6 @@ async function loadProfile(){
         );
 
 
-
     if(!profileCard) return;
 
 
@@ -42,7 +40,6 @@ async function loadProfile(){
         );
 
 
-
     const imamId =
         params.get("id");
 
@@ -51,13 +48,13 @@ async function loadProfile(){
     if(!imamId){
 
 
-        profileCard.innerHTML =
-        `
-        <p>
-            Profile ID Missing
-        </p>
-        `;
+        profileCard.innerHTML = `
 
+            <p>
+                Profile ID Missing
+            </p>
+
+        `;
 
         return;
 
@@ -69,30 +66,27 @@ async function loadProfile(){
 
 
         const doc =
-            await db
-            .collection("imams")
+            await window.db
+            .collection("imamRegistrations")
             .doc(imamId)
             .get();
-
 
 
 
         if(!doc.exists){
 
 
-            profileCard.innerHTML =
-            `
-            <p>
-                Imam Record Not Found
-            </p>
-            `;
+            profileCard.innerHTML = `
 
+                <p>
+                    Imam Record Not Found
+                </p>
+
+            `;
 
             return;
 
         }
-
-
 
 
 
@@ -101,18 +95,16 @@ async function loadProfile(){
 
 
 
+        if(imam.verified !== true){
 
 
-        if(!imam.verified){
+            profileCard.innerHTML = `
 
+                <p>
+                    Profile Not Available
+                </p>
 
-            profileCard.innerHTML =
-            `
-            <p>
-                This profile is not publicly available.
-            </p>
             `;
-
 
             return;
 
@@ -120,32 +112,44 @@ async function loadProfile(){
 
 
 
+        profileCard.innerHTML = `
 
-
-
-
-        profileCard.innerHTML =
-        `
 
         <div class="imam-card">
 
 
-            <h3>
+            <h2>
                 ${imam.imamName || ""}
-            </h3>
+            </h2>
 
 
 
             <p>
-                🕌
-                ${imam.mosqueName || ""}
+                🕌 ${imam.mosqueName || ""}
             </p>
 
 
 
             <p>
-                📍
-                ${imam.district || ""}
+                📍 ${imam.district || ""}
+            </p>
+
+
+
+            <p>
+                🏘 ${imam.tehsil || ""}
+            </p>
+
+
+
+            <p>
+                📞 ${imam.phone || ""}
+            </p>
+
+
+
+            <p>
+                🏠 ${imam.address || ""}
             </p>
 
 
@@ -155,7 +159,6 @@ async function loadProfile(){
                 ✅ Verified Imam
 
             </div>
-
 
 
         </div>
@@ -177,12 +180,12 @@ async function loadProfile(){
         );
 
 
+        profileCard.innerHTML = `
 
-        profileCard.innerHTML =
-        `
-        <p>
-            Profile Load Error
-        </p>
+            <p>
+                Profile Load Error
+            </p>
+
         `;
 
 

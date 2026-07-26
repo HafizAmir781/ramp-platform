@@ -2,14 +2,15 @@
  * ==========================================================
  * RAMP Ecosystem
  * Public Directory Module
- * Version : 4.1
+ * Version : 5.0 Production
  *
  * Features:
- * - Verified Imams Only
+ * - Approved Imams Only
  * - Live Counter
  * - District Filter
  * - Smart Search
- * - Imam Profile Link
+ * - Profile Link
+ * - Deleted Records Hidden
  * ==========================================================
  */
 
@@ -27,32 +28,26 @@ document.addEventListener(
 
 
 
-async function loadVerifiedImams() {
+
+
+async function loadVerifiedImams(){
 
 
     const list =
         document.getElementById("imam-list");
 
 
-    if (!list) return;
+    if(!list) return;
 
 
 
-    try {
+    try{
 
 
         const snapshot =
-            await db
-            .collection("imams")
-            .where(
-                "verified",
-                "==",
-                true
-            )
-            .orderBy(
-                "createdAt",
-                "desc"
-            )
+            await window.db
+            .collection("imamRegistrations")
+            .where("verified","==",true)
             .get();
 
 
@@ -64,11 +59,23 @@ async function loadVerifiedImams() {
         snapshot.forEach(doc => {
 
 
+            const data = doc.data();
+
+
+
+            if(data.deleted === true){
+
+                return;
+
+            }
+
+
+
             verifiedImams.push({
 
                 id: doc.id,
 
-                ...doc.data()
+                ...data
 
             });
 
@@ -91,7 +98,6 @@ async function loadVerifiedImams() {
 
     }
 
-
     catch(error){
 
 
@@ -101,17 +107,20 @@ async function loadVerifiedImams() {
         );
 
 
-        list.innerHTML =
-        `
-        <p>
-            Data Load Error
-        </p>
+        list.innerHTML = `
+
+            <p>
+                Data Load Error
+            </p>
+
         `;
+
 
     }
 
 
 }
+
 
 
 
@@ -141,6 +150,8 @@ function updateCounter(){
 
 
 
+
+
 function loadDistricts(){
 
 
@@ -155,46 +166,54 @@ function loadDistricts(){
 
 
 
-    const districts =
-        [
-            ...new Set(
-                verifiedImams.map(
-                    imam =>
-                    imam.district
-                )
+    filter.innerHTML = `
+
+        <option value="">
+            تمام اضلاع
+        </option>
+
+    `;
+
+
+
+    const districts = [
+
+        ...new Set(
+
+            verifiedImams.map(
+                imam => imam.district
             )
-        ];
+
+        )
+
+    ];
 
 
 
-    districts.forEach(
-        district => {
+    districts.forEach(district => {
 
 
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                district;
-
-
-            option.textContent =
-                district;
-
-
-            filter.appendChild(
-                option
+        const option =
+            document.createElement(
+                "option"
             );
 
 
-        }
-    );
+        option.value = district;
+
+        option.textContent = district;
+
+
+        filter.appendChild(option);
+
+
+    });
 
 
 }
+
+
+
 
 
 
@@ -243,14 +262,15 @@ function setupSearch(){
 
 
 
+
+
+
 function applyFilters(){
 
 
     const keyword =
         document
-        .getElementById(
-            "searchInput"
-        )
+        .getElementById("searchInput")
         .value
         .toLowerCase()
         .trim();
@@ -259,62 +279,46 @@ function applyFilters(){
 
     const district =
         document
-        .getElementById(
-            "districtFilter"
-        )
+        .getElementById("districtFilter")
         .value;
 
 
 
     const filtered =
-        verifiedImams.filter(
-            imam => {
-
-
-                const name =
-                    (imam.imamName || "")
-                    .toLowerCase();
+        verifiedImams.filter(imam => {
 
 
 
-                const mosque =
-                    (imam.mosqueName || "")
-                    .toLowerCase();
+            const text = `
+
+                ${imam.imamName || ""}
+
+                ${imam.mosqueName || ""}
+
+                ${imam.district || ""}
+
+            `.toLowerCase();
 
 
 
-                const imamDistrict =
-                    imam.district || "";
+            const matchText =
+                text.includes(keyword);
 
 
 
-                const matchText =
-                    name.includes(keyword)
-                    ||
-                    mosque.includes(keyword)
-                    ||
-                    imamDistrict
-                    .toLowerCase()
-                    .includes(keyword);
+            const matchDistrict =
+                !district ||
+                imam.district === district;
 
 
 
-                const matchDistrict =
-                    !district
-                    ||
-                    imamDistrict === district;
+            return (
+                matchText &&
+                matchDistrict
+            );
 
 
-
-                return (
-                    matchText
-                    &&
-                    matchDistrict
-                );
-
-
-            }
-        );
+        });
 
 
 
@@ -322,6 +326,9 @@ function applyFilters(){
 
 
 }
+
+
+
 
 
 
@@ -336,6 +343,7 @@ function renderImams(data){
         );
 
 
+
     const status =
         document.querySelector(
             "[data-ramp-status]"
@@ -346,11 +354,12 @@ function renderImams(data){
     if(data.length === 0){
 
 
-        list.innerHTML =
-        `
-        <p>
-            کوئی ریکارڈ نہیں ملا۔
-        </p>
+        list.innerHTML = `
+
+            <p>
+                کوئی ریکارڈ نہیں ملا۔
+            </p>
+
         `;
 
 
@@ -370,6 +379,7 @@ function renderImams(data){
 
 
 
+
     let html = "";
 
 
@@ -377,8 +387,8 @@ function renderImams(data){
     data.forEach(imam => {
 
 
-        html +=
-        `
+        html += `
+
 
         <div class="imam-card">
 
@@ -388,14 +398,17 @@ function renderImams(data){
             </h3>
 
 
+
             <p>
                 🕌 ${imam.mosqueName || ""}
             </p>
 
 
+
             <p>
                 📍 ${imam.district || ""}
             </p>
+
 
 
             <div class="verified-badge">
@@ -417,6 +430,7 @@ function renderImams(data){
 
         </div>
 
+
         `;
 
 
@@ -424,8 +438,7 @@ function renderImams(data){
 
 
 
-    list.innerHTML =
-        html;
+    list.innerHTML = html;
 
 
 

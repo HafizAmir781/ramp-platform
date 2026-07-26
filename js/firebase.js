@@ -2,7 +2,7 @@
  * ==========================================================
  * RAMP Ecosystem
  * Firebase Core
- * Version : 1.0
+ * Version : 2.0 (Production Safe)
  * Project : aimma-masjid
  * ==========================================================
  */
@@ -23,14 +23,35 @@ const firebaseConfig = {
 
 /* Initialize Firebase */
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
 /* Services */
 
-const auth = firebase.auth();
-const db = firebase.firestore();
+let auth = null;
+let db = null;
 
-/* Global RAMP Object */
+/* Auth (only if SDK loaded) */
+
+if (typeof firebase.auth === "function") {
+    auth = firebase.auth();
+} else {
+    console.warn("Firebase Auth SDK not loaded.");
+}
+
+/* Firestore (only if SDK loaded) */
+
+if (typeof firebase.firestore === "function") {
+    db = firebase.firestore();
+} else {
+    console.error("Firebase Firestore SDK not loaded.");
+}
+
+/* Global Objects */
+
+window.auth = auth;
+window.db = db;
 
 window.RAMP = window.RAMP || {};
 
@@ -44,5 +65,7 @@ window.RAMP.firebase = {
 console.log("====================================");
 console.log("RAMP Firebase Connected");
 console.log("Project :", firebaseConfig.projectId);
-console.log("Version : 1.0");
+console.log("Auth :", auth ? "Ready" : "Not Loaded");
+console.log("Firestore :", db ? "Ready" : "Not Loaded");
+console.log("Version : 2.0");
 console.log("====================================");

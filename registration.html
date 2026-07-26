@@ -1,12 +1,13 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RAMP | Imam Registration</title>
+    <title>RAMP | Imam Registration Portal</title>
 
     <link rel="stylesheet" href="../css/style.css">
 
@@ -14,100 +15,187 @@
 
 <body>
 
-<header class="page-header">
+    <header class="page-header">
 
-    <h1>RAMP</h1>
+        <img
+            src="../assets/logo/ramp-logo.png"
+            alt="RAMP Logo"
+            class="logo">
 
-    <p>Rabta Aimma Masajid Punjab</p>
+        <h1>RAMP</h1>
 
-</header>
+        <p>رابطہ آئمہ مساجد پنجاب</p>
 
-<main class="container">
+    </header>
 
-    <section class="card">
+    <main class="container">
 
-        <h2>Imam Registration</h2>
+        <section class="card">
 
-        <p>Please complete the form below.</p>
+            <h2>امام رجسٹریشن فارم</h2>
 
-        <form id="registrationForm">
+            <p>براہِ کرم تمام ضروری معلومات درست درج کریں۔</p>
 
-            <div class="form-group">
+            <form id="registrationForm">
 
-                <label for="imamName">
-                    Imam Name *
-                </label>
+                <!-- Imam Name -->
 
-                <input
-                    type="text"
-                    id="imamName"
-                    placeholder="Enter Imam Name"
-                    required>
+                <div class="form-group">
 
-            </div>
+                    <label for="imamName">
+                        امام کا نام *
+                    </label>
 
-            <div class="form-group">
+                    <input
+                        type="text"
+                        id="imamName"
+                        placeholder="امام کا مکمل نام"
+                        required>
 
-                <label for="mosqueName">
-                    Mosque Name *
-                </label>
+                </div>
 
-                <input
-                    type="text"
-                    id="mosqueName"
-                    placeholder="Jamia Masjid"
-                    required>
+                <!-- Mobile -->
 
-            </div>
+                <div class="form-group">
 
-            <div class="form-group">
+                    <label for="phone">
+                        موبائل نمبر *
+                    </label>
 
-                <label for="district">
-                    District *
-                </label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="03XXXXXXXXX"
+                        required>
 
-                <select id="district" required>
+                </div>
 
-                    <option value="">Select District</option>
+                <!-- Mosque Name -->
 
-                    <option>Lahore</option>
-                    <option>Rawalpindi</option>
-                    <option>Faisalabad</option>
-                    <option>Multan</option>
-                    <option>Gujranwala</option>
-                    <option>Sialkot</option>
-                    <option>Bahawalpur</option>
+                <div class="form-group">
 
-                </select>
+                    <label for="mosqueName">
+                        مسجد کا نام *
+                    </label>
 
-            </div>
+                    <input
+                        type="text"
+                        id="mosqueName"
+                        placeholder="جامع مسجد"
+                        required>
 
-            <button
-                type="submit"
-                id="submitBtn">
+                </div>
 
-                Register Imam
+                <!-- District -->
 
-            </button>
+                <div class="form-group">
 
-        </form>
+                    <label for="district">
+                        ضلع *
+                    </label>
 
-    </section>
+                    <select id="district" required>
 
-</main>
+                        <option value="">ضلع منتخب کریں</option>
 
-<!-- Firebase -->
+                        <option>Lahore</option>
+                        <option>Rawalpindi</option>
+                        <option>Faisalabad</option>
+                        <option>Multan</option>
+                        <option>Gujranwala</option>
+                        <option>Sialkot</option>
+                        <option>Bahawalpur</option>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+                    </select>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+                </div>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+                <!-- Tehsil -->
 
-<script src="../js/firebase.js"></script>
+                <div class="form-group">
 
-<script src="../js/register.js"></script>
+                    <label for="tehsil">
+                        تحصیل *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="tehsil"
+                        placeholder="تحصیل"
+                        required>
+
+                </div>
+
+                <!-- Address -->
+
+                <div class="form-group">
+
+                    <label for="address">
+                        پتہ
+                    </label>
+
+                    <textarea
+                        id="address"
+                        rows="3"
+                        placeholder="مکمل پتہ"></textarea>
+
+                </div>
+
+                <!-- Success Message -->
+
+                <div
+                    id="successMessage"
+                    class="success-message">
+                </div>
+
+                <!-- Error Message -->
+
+                <div
+                    id="errorMessage"
+                    class="error-message">
+                </div>
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    id="submitBtn">
+
+                    امام رجسٹر کریں
+
+                </button>
+
+                <!-- Loading -->
+
+                <div
+                    id="loading"
+                    style="display:none; margin-top:15px;">
+
+                    محفوظ کیا جا رہا ہے...
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- Project Files -->
+
+    <script src="../js/firebase.js"></script>
+
+    <script src="../js/register.js"></script>
 
 </body>
 
 </html>
+```
